@@ -1,7 +1,9 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-flash = require("connect-flash");
+
+const port = process.env.PORT || 2001;
+
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(flash());
@@ -20,6 +22,6 @@ app.get("/help", (req, res) => {
   res.render("help");
 });
 
-app.listen(2001, () => {
+app.listen(port, () => {
   console.log("Server is started");
 });
