@@ -11,14 +11,25 @@
           <div class="field">
             <label><h1>Location</h1></label>
             <div class="ui inverted divider"></div>
-            <input placeholder="Location" type="text" name="address" />
+            <input
+              placeholder="Location"
+              type="text"
+              name="address"
+              value="London"
+            />
           </div>
         </div>
 
         <input class="medium ui button" type="submit" value="Submit" />
+        <div class="ui error message"></div>
       </div>
     </form>
   </div>
 </div>
+<style>
+  .ui.footer.form-page {
+    bottom: 0;
+  }
+</style>
 
 <% include partials/footer %>

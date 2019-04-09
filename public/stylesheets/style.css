@@ -12,11 +12,12 @@ p {
 h1 {
   font-size: 40 px;
 }
+
 @media (min-height: 320px) {
   .ui.footer.form-page {
     /* Increased specificity for SO snippet priority */
     position: absolute;
-    bottom: 0;
+
     width: 100%;
     height: 2.5rem;
   }

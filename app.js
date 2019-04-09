@@ -1,9 +1,10 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-
+flash = require("connect-flash");
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
+app.use(flash());
 
 const weatherRoutes = require("./routes/weather.js");
 const helpRoutes = require("./routes/help");

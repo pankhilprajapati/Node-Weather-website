@@ -9,27 +9,34 @@ router.get("/", (req, res) => {
 
 router.get("/weather", (req, res) => {
   if (!req.query.address) {
-    return res.send({
-      error: "You must provide an address"
-    });
+    req.query.address = "London";
+    var data = {
+      forecast: "DEFAULT FORECAST",
+      location: "DEFAULT LOCATION",
+      address: req.query.address
+    };
+    res.render("index.ejs", { data: data });
   }
-  geocode(req.query.address, (error, { latitude, longitude, location }) => {
-    if (error) {
-      console.log(error);
-    }
-    forecast(latitude, longitude, (error, forecastData) => {
+  geocode(
+    req.query.address,
+    (error, { latitude, longitude, location } = {}) => {
       if (error) {
-        console.log("error");
+        console.log(error);
       }
-      const data = {
-        forecast: forecastData,
-        location: location,
-        address: req.query.address
-      };
+      forecast(latitude, longitude, (error, forecastData) => {
+        if (error) {
+          console.log("error");
+        }
+        const data = {
+          forecast: forecastData,
+          location: location,
+          address: req.query.address
+        };
 
-      res.render("index.ejs", { data: data });
-    });
-  });
+        res.render("index.ejs", { data: data });
+      });
+    }
+  );
 });
 
 router.get("/find", (req, res) => {
