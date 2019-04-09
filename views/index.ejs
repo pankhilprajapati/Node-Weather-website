@@ -1,0 +1,26 @@
+<% include partials/header %>
+<div class="ui raised very padded text container segment">
+  <div class="ui inverted segment">
+    <h1>Weather</h1>
+    <p></p>
+    <div class="ui inverted divider"></div>
+    <p>
+      Here u will be able to see the Weather Forecast of<br />
+      <u><em><%=data.address%></em></u>
+    </p>
+    <ul>
+      <li>
+        <p>Forecast and Location</p>
+        <ul>
+          <li><p><%=data.location%></p></li>
+          <li><p><%=data.forecast%></p></li>
+        </ul>
+      </li>
+    </ul>
+    <h4 class="ui horizontal inverted divider">
+      LIVE WEATHER FORECAST
+    </h4>
+  </div>
+</div>
+
+<% include partials/footer %>

@@ -1,0 +1,24 @@
+<% include partials/header %>
+<div class="ui raised very padded text container segment">
+  <div class="ui inverted segment">
+    <form
+      action="/weather
+    "
+      method="GET"
+    >
+      <div class="ui inverted form">
+        <div class="two fields">
+          <div class="field">
+            <label><h1>Location</h1></label>
+            <div class="ui inverted divider"></div>
+            <input placeholder="Location" type="text" name="address" />
+          </div>
+        </div>
+
+        <input class="medium ui button" type="submit" value="Submit" />
+      </div>
+    </form>
+  </div>
+</div>
+
+<% include partials/footer %>
