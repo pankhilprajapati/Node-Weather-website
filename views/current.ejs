@@ -1,0 +1,114 @@
+<% include partials/header %>
+<div class="ui raised very padded text container segment">
+    <div class="ui inverted segment">
+      <h1>Weather</h1>
+      <p>
+        Click here 
+        <button id="send" class="ui primary button">Forecast</button>
+      </p>
+      <div class="ui inverted divider"></div>
+      <div id= "ha" >
+          <p>
+              Here u will be able to see the Weather Forecast of<br />
+              <u><em> CURRENT LOCATION</em></u>
+            </p>
+            <ul>
+      
+              <li>
+                <p>Forecast and Location</p>
+                <ul>
+                  
+                  <li><p>Current Location - <em id="demo"></em> 
+                  </p></li>
+                  <li><p>So Currently it's <em id ="text"></em> where u r present</p></li>
+                  <li><p>It's <em id="rain"></em> % of the Raining</p></li>
+                  <li><p>Temperature today is <em id="temp"></em> Degree Celcius</p></li>
+                </ul>
+              </li>
+            </ul>
+      </div>
+      <h4 class="ui horizontal inverted divider">
+        LIVE WEATHER FORECAST
+      </h4>
+    </div>
+  </div>
+  <style>
+      .ui.footer.form-page {
+        bottom: 0;
+      }
+    </style>
+
+  <script>
+    var x = document.getElementById("demo");
+var a =document.getElementById("text");
+var b = document.getElementById("rain");
+var c = document.getElementById("temp")
+
+
+
+const getLocation = ()=>{
+  if(!navigator.geolocation){
+    return new Error("Nothing")
+  }
+  navigator.geolocation.getCurrentPosition((p)=>{
+    const coords = {
+      lat: p.coords.latitude,
+      lon: p.coords.longitude
+    }
+    console.log(coords.lat, coords.lon)
+    getGeolocation(coords.lat, coords.lon)
+    
+ 
+    })
+}
+const getGeolocation = (lat, lng) => {
+
+  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?types=poi&access_token=pk.eyJ1IjoicGFwYTEzIiwiYSI6ImNqdTRmbHY4bDB4aWs0M21teHJyaDVtMjkifQ.IF1k59OYks524_NwDPt1VA`
+  
+  fetch(url)
+  .then((res)=>res.json())
+  .then((myjson)=>{
+    console.log(myjson)
+    forecast(myjson.features[0].context[1].text)
+    showPosition(myjson.features[0].place_name)
+  })
+}
+
+
+
+const forecast = (loc) => {
+  const url =
+    `https://api.apixu.com/v1/forecast.json?key=81501ebd86b848feb4890045192105&q=${loc}`
+  
+  fetch(url,{
+    method: "GET",
+  
+
+  })
+  .then((res)=>res.json())
+  .then((data) =>{
+    
+    const details= {
+      text: data.current.condition.text,
+      rain: data.current.precip_in,
+      temp: data.current.temp_c,
+    }
+    console.log(data)
+    showWeat(details.text,details.rain,details.temp)
+  })
+};
+
+function showPosition(position) {
+  x.innerHTML =position;
+}
+ function showWeat(t,r,te){
+   a.innerHTML = t
+   b.innerHTML = r
+   c.innerHTML = te
+ }
+
+const $location = document.querySelector("#send")
+$location.addEventListener("click",getLocation)
+  </script>
+<% include partials/footer %>
+
