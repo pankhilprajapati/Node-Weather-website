@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/weather", (req, res) => {
+  
   if (!req.query.address) {
     req.query.address = "London";
     var data = {
@@ -40,6 +41,7 @@ router.get("/weather", (req, res) => {
 });
 
 router.get("/find", (req, res) => {
+  
   res.render("form.ejs");
 });
 

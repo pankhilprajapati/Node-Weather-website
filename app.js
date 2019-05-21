@@ -21,6 +21,10 @@ app.get("/help", (req, res) => {
   res.render("help");
 });
 
+app.get("/current",(req,res)=>{
+  res.render("current")
+})
+
 app.listen(port, () => {
   console.log("Server is started");
 });
