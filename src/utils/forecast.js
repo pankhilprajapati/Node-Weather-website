@@ -8,7 +8,6 @@ const forecast = (latitude, longitude, call) => {
     longitude;
 
   request({ url: url, json: true }, (error, { body }) => {
-    
     if (error) {
       call("Unable to connect to weather service!", undefined);
     } else if (body.error) {
